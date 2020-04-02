@@ -31,12 +31,12 @@ def test_Standard_Deviation(benchmark, module, shape):
     run_benchmark(benchmark, m, m.std, m.random.random, shape)
 
 
-@pytest.mark.parametrize("module", ["numpy", "cupy"])
+@pytest.mark.parametrize("module", ["numpy", "cupy", "delayarray"])
 @pytest.mark.parametrize("shape", [(1000, 1000), (10000, 10000), (20000, 20000)])
 def test_Elementwise(benchmark, module, shape):
     m = importlib.import_module(module)
 
-    compute_func = lambda data: m.sin(data) ** 2 + m.cos(data) ** 2
+    compute_func = lambda data: str(m.sin(data) ** 2 + m.cos(data) ** 2)
     run_benchmark(benchmark, m, compute_func, m.random.random, shape)
 
 
